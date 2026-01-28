@@ -79,455 +79,290 @@ Los errores no se eliminan, se almacenan con su motivo:
 
 ## <a name="arquitectura">Arquitectura y Flujo</a>
 
+<img src="public/Diagrama.png" alt="Diagrama de Arquitectura" />
 
-Follow these steps to set up the project locally on your machine.
+## <a name="quick-start">🤸 Quick Start</a>
 
-**Prerequisites**
+### Prerrequisitos
 
-Make sure you have the following installed on your machine:
+- Git
+- Node.js
+- npm
 
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
-
-**Cloning the Repository**
+### Clonar repositorio
 
 ```bash
-git clone https://github.com/AngelEmilioAquino/RoboTap.git
-cd robotap
+git clone https://github.com/AngelEmilioAquino/dashboard-DNI.git
+cd dashboard-DNI
 ```
 
-**Installation**
+**Instalar Dependencia**
 
-Install the project dependencies using npm:
+Instale las dependencias del proyecto usando npm:
 
 ```bash
 npm install
 ```
 
-**Running the Project**
+**Correr el proyecto**
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser to view the project.
+Abrir [http://localhost:5173](http://localhost:5173) en el navegador para visualizar el proyecto.
 
 ## <a name="snippets">🕸️ Snippets</a>
 
 <details>
-<summary><code>tailwind.config.js</code></summary>
+<summary><code>Global.css</code></summary>
 
 ```jsx
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: {
-        p1: '#2EF2FF',
-        p2: '#3C52D9',
-        p3: '#C8EA80',
-        p4: '#EAEDFF',
-        p5: '#C4CBF5',
-        s1: '#080D27',
-        s2: '#0C1838',
-        s3: '#334679',
-        s4: '#1959AD',
-        s5: '#263466',
-        black: {
-          DEFAULT: '#000000',
-          100: '#05091D',
-        },
-      },
-      boxShadow: {
-        100: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD',
-        200: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 4px 10px #3391FF',
-        300: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD',
-        400: 'inset 0px 2px 4px 0 rgba(255, 255, 255, 0.05)',
-        500: '0px 16px 24px rgba(0, 0, 0, 0.25), 0px -14px 48px rgba(40, 51, 111, 0.7)',
-      },
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
-      },
-      transitionProperty: {
-        borderColor: 'border-color',
-      },
-      spacing: {
-        '1/5': '20%',
-        '2/5': '40%',
-        '3/5': '60%',
-        '4/5': '80%',
-        '3/20': '15%',
-        '7/20': '35%',
-        '9/20': '45%',
-        '11/20': '55%',
-        '13/20': '65%',
-        '15/20': '75%',
-        '17/20': '85%',
-        '19/20': '95%',
-        22: '88px',
-        100: '100px',
-        512: '512px',
-        330: '330px',
-        388: '388px',
-        400: '400px',
-        440: '440px',
-        640: '640px',
-        960: '960px',
-        1230: '1230px',
-      },
-      zIndex: {
-        1: '1',
-        2: '2',
-        4: '4',
-      },
-      lineHeight: {
-        12: '48px',
-      },
-      borderRadius: {
-        14: '14px',
-        20: '20px',
-        40: '40px',
-        half: '50%',
-        '7xl': '40px',
-      },
-      flex: {
-        50: '0 0 50%',
-        320: '1px 0 320px',
-        300: '0 0 300px',
-        540: '0 0 540px',
-        280: '0 0 280px',
-        256: '0 0 256px',
-        100: '0 0 100%',
-      },
-    },
-  },
-  plugins: [],
-};
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 ```
 
 </details>
 
 <details>
-<summary><code>index.css</code></summary>
+<summary><code>data.ts</code></summary>
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
-    @apply bg-s1;
-  }
-
-  body {
-    @apply font-poppins text-[16px] tracking-[-0.03em] text-p5;
-  }
-
-  a {
-    @apply no-underline;
-  }
-
-  img {
-    @apply block max-w-full;
-  }
-
-  button {
-    @apply bg-none tracking-[-0.03em];
-  }
-
-  input {
-    @apply tracking-[-0.03em];
-  }
+```ts
+export interface Cliente {
+  cliente_id: number
+  nombre: string
+  ciudad: string
+  segmento: string
+  fecha_registro: string
 }
 
-@layer utilities {
-  /* START of Typography */
-  .h-num {
-    @apply font-inter text-[72px] font-bold leading-[84px];
-  }
-
-  .h1 {
-    @apply text-[84px] font-black leading-[84px] tracking-[-0.03em];
-  }
-
-  .h2 {
-    @apply text-[64px] font-black leading-[64px];
-  }
-
-  .h3 {
-    @apply text-[48px] font-semibold leading-[56px] tracking-[-0.02em];
-  }
-
-  .h4 {
-    @apply text-[40px] font-semibold leading-[52px];
-  }
-
-  .h5 {
-    @apply text-[32px] font-semibold leading-[40px];
-  }
-
-  .h6 {
-    @apply text-[24px] font-medium leading-[36px];
-  }
-
-  .body-1 {
-    @apply text-[22px] leading-[36px];
-  }
-
-  .body-2 {
-    @apply text-[18px] font-semibold leading-[32px];
-  }
-
-  .body-3 {
-    @apply text-[16px] leading-[28px] tracking-[0.02em];
-  }
-
-  .base {
-    @apply text-[16px] font-medium leading-[24px] tracking-[0.03em];
-  }
-
-  .base-bold {
-    @apply text-[16px] font-bold leading-[24px];
-  }
-
-  .base-small {
-    @apply text-[14px] font-semibold leading-[18px] tracking-[0.03em];
-  }
-
-  .small-1 {
-    @apply text-[14px] font-semibold leading-[18px] tracking-[0.03em];
-  }
-
-  .small-2 {
-    @apply text-[12px] font-bold leading-[16px] tracking-[0.3em];
-  }
-
-  .small-compact {
-    @apply text-[12px] font-semibold leading-[18px] tracking-[0.03em];
-  }
-
-  /* END of Typography */
-  /* START of Gradients */
-  .g1 {
-    background: linear-gradient(rgba(196, 203, 245, 0.5), transparent);
-  }
-
-  .g2 {
-    background: linear-gradient(#3062a3, #19549f);
-  }
-
-  .g3 {
-    background: linear-gradient(#3c52d9, #0c1838);
-  }
-
-  .g4 {
-    background: linear-gradient(#253575, #162561);
-  }
-
-  .g5 {
-    background: linear-gradient(#334679, #162561);
-  }
-
-  .g6 {
-    background: linear-gradient(#334679, #0c1838);
-  }
-
-  .g7 {
-    background: linear-gradient(#1b275a, #0e1434);
-  }
-
-  .g8 {
-    background: linear-gradient(to right, transparent, #2ef2ff, transparent);
-  }
-
-  .g9 {
-    background: linear-gradient(#080d27, transparent);
-  }
-
-  /* END of Gradients */
-  /* START of Common */
-  .container {
-    @apply mx-auto max-w-[1252px] px-16 max-xl:px-10 max-lg:px-6 max-sm:px-4;
-  }
-
-  .caption {
-    @apply small-2 mb-5 uppercase text-p3;
-  }
-
-  .scroll-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  .scroll-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  /* END of Common */
-  /* START of Header */
-  .nav-active {
-    @apply text-p3;
-  }
-
-  .nav-li {
-    @apply relative flex flex-1 items-center justify-between max-lg:flex-col max-lg:items-start;
-  }
-
-  .nav-logo {
-    @apply relative flex flex-1 items-center justify-center;
-  }
-
-  .dot {
-    @apply size-1.5 rounded-full bg-p2 max-lg:hidden;
-  }
-
-  .sidebar-before {
-    @apply max-lg:before:absolute max-lg:before:-right-64 max-lg:before:top-2/5 max-lg:before:h-[440px] max-lg:before:w-[252px] max-lg:before:bg-s4 max-lg:before:blur-[200px] max-lg:before:content-[''];
-  }
-
-  /* END of Header */
-  /* START of Hero */
-  .hero-img_res {
-    @apply max-lg:-top-40 max-lg:left-[calc(50%-280px)] max-lg:w-[1160px] max-md:bottom-[-590px] max-md:left-[calc(50%-390px)] max-md:top-auto;
-  }
-
-  /* END of Hero */
-  /*START of Custom Button*/
-  .inner-before {
-    @apply before:g7 before:absolute before:inset-0 before:opacity-0 before:transition-opacity before:duration-500 before:content-[''];
-  }
-
-  .glow-before {
-    @apply before:g8 before:absolute before:left-2/5 before:top-0 before:z-4 before:h-0.5 before:w-3/5 before:opacity-0 before:transition-all before:duration-500 before:content-[''] group-hover:before:left-4 group-hover:before:opacity-40;
-  }
-
-  .glow-after {
-    @apply after:g8 after:absolute after:bottom-0 after:left-4 after:z-4 after:h-0.5 after:w-7/20 after:opacity-0 after:transition-all after:duration-500 after:content-[''] group-hover:after:left-3/5 group-hover:after:opacity-40;
-  }
-
-  /*END of Custom Button*/
-  /* START of Feature */
-  .feature-after {
-    @apply after:g1 after:absolute after:right-0 after:top-0 after:h-full after:w-1/2 after:mix-blend-soft-light after:content-[''] max-md:after:hidden;
-  }
-
-  /* END of Feature */
-  /* START of Pricing */
-  .pricing-head_before {
-    @apply before:absolute before:-bottom-44 before:left-1/5 before:h-96 before:w-13/20 before:bg-s4/50 before:blur-[200px] before:content-[''];
-  }
-
-  .pricing-head_btn {
-    @apply base-bold relative z-2 h-16 flex-1 uppercase text-p5 transition-colors duration-500 hover:text-p4;
-  }
-
-  .pricing-head_btn_before {
-    @apply before:absolute before:-top-16 before:left-9 before:right-9 before:bg-s4 before:blur-xl before:content-[""];
-  }
-
-  .pricing-bg {
-    @apply pointer-events-none absolute -bottom-16 left-[calc(50%-480px)] z-2 mx-auto w-960;
-  }
-
-  .pricing-plan_first {
-    @apply first:rounded-bl-3xl first:rounded-tl-3xl lg:first:border-r-0;
-  }
-
-  .pricing-plan_last {
-    @apply last:rounded-br-3xl last:rounded-tr-3xl lg:last:border-l-0;
-  }
-
-  .pricing-plan_odd {
-    @apply odd:border-s3 odd:bg-s1 lg:odd:mt-12;
-  }
-
-  .pricing-plan_even {
-    @apply even:g7 even:rounded-bl-3xl even:rounded-br-3xl even:rounded-tl-3xl even:rounded-tr-3xl even:border-s4;
-  }
-
-  /* END of Pricing */
-  /* START of FAQ */
-  .faq-line_after {
-    @apply after:absolute after:-top-1.5 after:left-[calc(50%-5px)] after:z-4 after:size-2.5 after:rounded-half after:border-2 after:border-s2 after:bg-s1 after:content-[''];
-  }
-
-  .faq-glow_before {
-    @apply before:absolute before:left-[calc(50%-160px)] before:top-[-160px] before:size-[320px] before:bg-s4/25 before:mix-blend-soft-light before:blur-[200px] before:content-[''];
-  }
-
-  .faq-icon {
-    @apply before:absolute before:h-0.5 before:w-3 before:bg-p3 before:content-[''] after:absolute after:h-0.5 after:w-3 after:rotate-90 after:bg-p3 after:transition-all after:duration-500 after:content-[''];
-  }
-
-  /* END of FAQ */
-  /* START of Testimonials */
-  .testimonials_head-res {
-    @apply max-2xl:mr-6 max-xl:mr-3 max-lg:mx-auto max-lg:mb-36 max-lg:max-w-330 max-lg:text-center max-md:mb-24 max-md:max-w-52;
-  }
-
-  .testimonials_inner-before {
-    @apply before:pointer-events-none before:absolute before:-top-28 before:left-[calc(50%-1px)] before:h-[calc(100%+218px)] before:w-0.5 before:bg-s2 before:content-[''] before:max-lg:top-0 before:max-lg:h-full before:max-md:hidden;
-  }
-
-  .testimonials_inner-after {
-    @apply after:pointer-events-none after:absolute after:-bottom-52 after:left-[calc(50%-1px)] after:h-24 after:w-0.5 after:bg-s5 after:content-[''] after:max-lg:-bottom-24 after:max-md:hidden;
-  }
-
-  .testimonials_group-after {
-    @apply after:pointer-events-none after:absolute after:-bottom-[212px] after:left-[calc(50%-5px)] after:z-2 after:size-2.5 after:rounded-half after:border-2 after:border-s5 after:bg-s1 after:content-[''] max-lg:after:-bottom-[102px] max-md:after:hidden;
-  }
-
-  /* END of Testimonials */
-  /*  START of Download*/
-  .download_tech-link_last-before {
-    @apply last:relative last:before:pointer-events-none last:before:absolute last:before:left-full last:before:top-[calc(50%-1px)] last:before:mr-6 last:before:h-0.5 last:before:w-[140px] last:before:bg-s5 last:before:content-[''] last:before:max-xl:w-[105px] last:before:max-lg:w-[80px] last:before:max-md:hidden;
-  }
-
-  .download_tech-link_last-after {
-    @apply last:after:pointer-events-none last:after:absolute last:after:left-[223px] last:after:top-[calc(50%-5px)] last:after:z-2 last:after:size-2.5 last:after:rounded-half last:after:border-2 last:after:border-s5 last:after:bg-s1 last:after:content-[''] last:after:max-xl:left-[187px] last:after:max-lg:left-[163px] last:after:max-md:hidden;
-  }
-
-  .download_tech-icon {
-    @apply relative z-2 flex size-full items-center justify-center transition-all duration-500;
-  }
-
-  .download_tech-icon_before {
-    @apply before:absolute before:inset-1.5 before:rounded-half before:bg-s2 before:content-[''] hover:border-s4;
-  }
-
-  .download_tech-link:hover .download_tech-icon svg path {
-    @apply fill-p1;
-  }
-
-  .download_preview-before {
-    @apply before:g8 before:absolute before:-top-0.5 before:right-6 before:h-0.5 before:w-[63.2%] before:opacity-40 before:content-[''];
-  }
-
-  .download_preview-after {
-    @apply after:g8 after:absolute after:-bottom-0.5 after:left-6 after:h-0.5 after:w-[42.2%] after:opacity-40 after:content-[''];
-  }
-
-  .download_preview-dot {
-    @apply absolute top-6 size-2.5 rounded-half;
-  }
-
-  /*  END of Download*/
-  /*  START of Footer */
-  .legal-after {
-    @apply after:absolute after:-right-5 after:top-[calc(50%-1px)] after:h-0.5 after:w-0.5 after:rounded-half after:bg-p2 after:content-[''];
-  }
-
-  .social-icon {
-    @apply flex size-10 items-center justify-center rounded-full border-2 border-s4/25 bg-s1/5 transition-all duration-500 hover:border-s4;
-  }
-
-  /*  END of Footer*/
+export interface Venta {
+  venta_id: number
+  cliente_id: number
+  fecha: string
+  total: number
+  moneda: string
+  canal: string
+}
+
+export const clientes: Cliente[] = [
+  { cliente_id: 1, nombre: "Clínica Guerrero S.A.", ciudad: "La Romana", segmento: "Individual", fecha_registro: "2024-11-23" },
+  { cliente_id: 2, nombre: "Raúl Pérez", ciudad: "San Pedro de Macorís", segmento: "Retail", fecha_registro: "2024-12-12" },
+  { cliente_id: 3, nombre: "Ferretería Guerrero Corp.", ciudad: "San Pedro de Macorís", segmento: "Individual", fecha_registro: "2024-01-17" },
+  { cliente_id: 4, nombre: "Importadora Rodríguez S.A.", ciudad: "Higüey", segmento: "Corporativo", fecha_registro: "2024-10-14" },
+  { cliente_id: 5, nombre: "Supermercados Del Este", ciudad: "Santo Domingo", segmento: "Corporativo", fecha_registro: "2024-05-20" },
+  { cliente_id: 6, nombre: "María González", ciudad: "Santiago", segmento: "Individual", fecha_registro: "2024-03-08" },
+  { cliente_id: 7, nombre: "Tech Solutions RD", ciudad: "Santo Domingo", segmento: "Corporativo", fecha_registro: "2024-07-15" },
+  { cliente_id: 8, nombre: "Farmacia Central", ciudad: "La Vega", segmento: "Retail", fecha_registro: "2024-09-22" },
+]
+
+export const ventas: Venta[] = [
+  { venta_id: 1001, cliente_id: 1, fecha: "2025-03-27", total: 1316.31, moneda: "DOP", canal: "kiosko" },
+  { venta_id: 1002, cliente_id: 2, fecha: "2025-01-09", total: 2912.88, moneda: "DOP", canal: "web" },
+  { venta_id: 1003, cliente_id: 3, fecha: "2025-02-15", total: 4521.50, moneda: "DOP", canal: "tienda" },
+  { venta_id: 1004, cliente_id: 4, fecha: "2025-03-01", total: 8750.00, moneda: "DOP", canal: "web" },
+  { venta_id: 1005, cliente_id: 5, fecha: "2025-01-20", total: 15230.75, moneda: "DOP", canal: "tienda" },
+  { venta_id: 1006, cliente_id: 6, fecha: "2025-02-28", total: 890.25, moneda: "DOP", canal: "kiosko" },
+  { venta_id: 1007, cliente_id: 7, fecha: "2025-03-15", total: 23450.00, moneda: "DOP", canal: "web" },
+  { venta_id: 1008, cliente_id: 8, fecha: "2025-03-20", total: 3200.50, moneda: "DOP", canal: "tienda" },
+  { venta_id: 1009, cliente_id: 1, fecha: "2025-02-10", total: 2100.00, moneda: "DOP", canal: "web" },
+  { venta_id: 1010, cliente_id: 2, fecha: "2025-03-05", total: 1850.75, moneda: "DOP", canal: "kiosko" },
+  { venta_id: 1011, cliente_id: 3, fecha: "2025-01-25", total: 5600.00, moneda: "DOP", canal: "tienda" },
+  { venta_id: 1012, cliente_id: 4, fecha: "2025-02-20", total: 9200.50, moneda: "DOP", canal: "web" },
+]
+
+// Helper functions for dashboard statistics
+export function getTotalVentas(): number {
+  return ventas.reduce((sum, v) => sum + v.total, 0)
+}
+
+export function getTotalClientes(): number {
+  return clientes.length
+}
+
+export function getVentasPorCanal(): { canal: string; total: number; count: number }[] {
+  const canalMap = new Map<string, { total: number; count: number }>()
+  
+  for (const venta of ventas) {
+    const existing = canalMap.get(venta.canal) || { total: 0, count: 0 }
+    canalMap.set(venta.canal, {
+      total: existing.total + venta.total,
+      count: existing.count + 1
+    })
+  }
+  
+  return Array.from(canalMap.entries()).map(([canal, data]) => ({
+    canal,
+    ...data
+  }))
+}
+
+export function getVentasPorMes(): { mes: string; total: number }[] {
+  const meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+  const mesMap = new Map<number, number>()
+  
+  for (const venta of ventas) {
+    const mesIndex = new Date(venta.fecha).getMonth()
+    const existing = mesMap.get(mesIndex) || 0
+    mesMap.set(mesIndex, existing + venta.total)
+  }
+  
+  return Array.from(mesMap.entries())
+    .sort((a, b) => a[0] - b[0])
+    .map(([mesIndex, total]) => ({
+      mes: meses[mesIndex],
+      total
+    }))
+}
+
+export function getClientesPorSegmento(): { segmento: string; count: number }[] {
+  const segmentoMap = new Map<string, number>()
+  
+  for (const cliente of clientes) {
+    const existing = segmentoMap.get(cliente.segmento) || 0
+    segmentoMap.set(cliente.segmento, existing + 1)
+  }
+  
+  return Array.from(segmentoMap.entries()).map(([segmento, count]) => ({
+    segmento,
+    count
+  }))
+}
+
+export function getVentasRecientes(): (Venta & { cliente_nombre: string })[] {
+  return ventas
+    .sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime())
+    .slice(0, 5)
+    .map(venta => {
+      const cliente = clientes.find(c => c.cliente_id === venta.cliente_id)
+      return {
+        ...venta,
+        cliente_nombre: cliente?.nombre || "Cliente Desconocido"
+      }
+    })
 }
 ```
 
