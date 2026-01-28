@@ -480,15 +480,9 @@ REFERENCES public.clientes (cliente_id);
 
 El **Dashboard DNI** representa una solución completa para la carga, limpieza, normalización y explotación de datos provenientes de fuentes externas, cumpliendo con los objetivos establecidos en la prueba técnica. El proyecto integra de manera efectiva procesos de tratamiento de datos con una capa de visualización moderna y funcional.
 
-### Aspectos Técnicos
-
 A nivel técnico, se aplicaron buenas prácticas en el manejo de datos, asegurando la correcta normalización de fechas, validación de valores inconsistentes y conversión de datos numéricos, sin comprometer la integridad de la información original. Esto permite obtener datos confiables y listos para análisis, consultas y visualización.
 
-### Enfoque Frontend
-
-Desde el enfoque frontend, el dashboard fue desarrollado con una arquitectura clara y reutilizable, priorizando la experiencia de usuario mediante visualizaciones intuitivas, componentes desacoplados y un diseño moderno basado en **Glassmorphism**, lo que facilita la lectura de métricas y la interpretación de resultados.
-
-### Conclusiones Finales
+Desde el enfoque frontend, el dashboard fue desarrollado con una arquitectura clara y reutilizable, priorizando la experiencia de usuario mediante visualizaciones intuitivas, componentes desacoplados y un diseño moderno, lo que facilita la lectura de métricas y la interpretación de resultados.
 
 Este proyecto demuestra la capacidad de abordar un flujo de datos de extremo a extremo, desde la ingestión hasta la explotación visual, tomando decisiones técnicas justificadas y escalables. El **Dashboard DNI** establece una base sólida para futuras extensiones, como integración de APIs, automatización de procesos ETL o análisis más avanzados, cumpliendo con los criterios de evaluación y reflejando un enfoque profesional en el desarrollo de software.
 
