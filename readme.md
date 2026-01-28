@@ -1,53 +1,84 @@
 <div align="center">
   <div>
-    <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="react.js" />
-    <img src="https://img.shields.io/badge/-Vite-black?style=for-the-badge&logoColor=white&logo=vite&color=646CFF" alt="vite" />
-    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
+    <img src="https://img.shields.io/badge/-React-black?style=for-the-badge&logo=react&logoColor=white&color=61DAFB" />
+    <img src="https://img.shields.io/badge/-Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logo=tailwindcss&logoColor=white&color=06B6D4" />
+    <img src="https://img.shields.io/badge/-PostgreSQL-black?style=for-the-badge&logo=postgresql&logoColor=white&color=336791" />
+    <img src="https://img.shields.io/badge/-Supabase-black?style=for-the-badge&logo=supabase&logoColor=white&color=3ECF8E" />
   </div>
 
-<h1 align="center">RoboTap</h1>
+<h1 align="center">📊 Dashboard de Ventas & Auditoría de Datos</h1>
+<p align="center">
+Prueba Técnica – Carga, Normalización y Explotación de Datos
+</p>
 </div>
 
-## 📋 <a name="table">Table of Contents</a>
+---
 
-1. 🤖 [Introduction](#introduction)
+## 📋 Table of Contents
+
+1. 🤖 [Introducción](#introduccion)
 2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
-5. 🕸️ [Snippets (Code to Copy)](#snippets)
-6. 🔗 [Assets](#links)
-7. 🚀 [More](#more)
+3. 🔋 [Características](#features)
+4. 🧠 [Arquitectura y Flujo](#arquitectura)
+5. 🤸 [Quick Start](#quick-start)
+6. 🗄️ [Modelo de Datos](#modelo)
+7. 🚀 [Conclusión](#conclusion)
 
-## <a name="introduction">🤖 Introduction</a>
+---
 
-RoboTap is a university initiative developed at the Pedro Henríquez Ureña National University (UNPHU) that combines technology, sustainability, and social impact to support patients undergoing chemotherapy by recycling plastic bottle caps.
+## <a name="introduccion">🤖 Introducción</a>
 
-Every cap counts. Every action makes a difference. Every contribution makes a real difference.
+Este proyecto corresponde a una **prueba técnica de desarrollo**, cuyo objetivo es demostrar la capacidad de:
 
-## <a name="tech-stack">⚙️ Tech Stack</a>
+- Cargar datos desde archivos CSV externos
+- Limpiar y normalizar información inconsistente
+- Preservar errores para auditoría
+- Explotar los datos mediante visualización y análisis
 
-- Vite
-- React.js
-- Tailwind CSS
+La solución simula un **entorno real de datos empresariales**, donde los errores no se eliminan, sino que se **registran, analizan y visualizan**.
 
-## <a name="features">🔋 Features</a>
+---
 
-👉 **Stunning Sections**: Includes hero, features, pricing (monthly/yearly), FAQ, testimonials, and download software
-sections.
+## <a name="tech-stack">Tech Stack</a>
 
-👉 **Smooth Animations**: Complex CSS for fluid animations and eye-catching effects.
+- **Next.js (App Router)**
+- **React**
+- **Tailwind CSS**
+- **Recharts**
+- **PostgreSQL**
+- **Supabase**
+- **SQL (ETL & auditoría)**
 
-👉 **Cool CSS Gradients**: Beautiful gradient effects using CSS `before` and `after` pseudo-elements.
+---
 
-👉 **Seamless Navigation**: Offers a smooth user experience with intuitive navigation and scrolling.
+## <a name="features">Características</a>
 
-👉 **Optimized Performance**: Built for fast loading and an optimized experience.
+**Carga de datos RAW**  
+Los CSV se almacenan sin modificaciones para preservar trazabilidad.
 
-👉 **Pixel Perfect Design**: Ensures flawless responsiveness across all devices and screen sizes.
+**Normalización de datos**  
+- Fechas inválidas
+- Valores nulos
+- Totales negativos
+- Números en formato texto
 
-and many more, including code architecture and reusability
+**Auditoría completa**  
+Los errores no se eliminan, se almacenan con su motivo:
+- `FECHA_INVALIDA`
+- `TOTAL_NEGATIVO`
+- `CLIENTE_ID_NULO`
+- `FORMATO_INVALIDO`
 
-## <a name="quick-start">🤸 Quick Start</a>
+**Dashboard Analítico**  
+- KPIs de errores
+- Gráficos por tipo de error
+- Gráficos por canal de venta
+- Tablas detalladas de auditoría
+---
+
+## <a name="arquitectura">Arquitectura y Flujo</a>
+
 
 Follow these steps to set up the project locally on your machine.
 
