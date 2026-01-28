@@ -13,19 +13,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: 'public/logoNew.png',
+        url: '/logoNew.png',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: 'public/logoNew.png',
+        url: '/logoNew.png', 
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: 'public/logoNew.png',
+        url: '/logoNew.png', 
         type: 'image/svg+xml',
       },
     ],
-    apple: 'public/logoNew.png',
+    apple: '/logoNew.png', 
   },
 }
 
