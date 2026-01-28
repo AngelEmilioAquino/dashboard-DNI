@@ -1,0 +1,224 @@
+cliente_id,nombre,ciudad,segmento,fecha_registro
+1,Clínica Guerrero S.A.,La Romana,Individual,2024-11-23
+2,Raúl Pérez,San Pedro de Macorís,Retail,2024-12-12
+3,Ferretería Guerrero Corp.,San Pedro de Macorís,Individual,2024-01-17
+4,Importadora Rodríguez S.A.,Higüey,Corporativo,2024-10-14
+5,Isabel Rodríguez,San Francisco de Macorís,Corporativo,2025-02-18
+6,Inversiones Martínez SRL,Bonao,Individual,2024-03-20
+7,Felipe Aquino,Azua,Individual,2024-07-02
+8,Ana Hernández,Santiago,Corporativo,2025-01-08
+9,José Vásquez,San Cristóbal,Individual,2024-11-17
+10,Miguel Pérez,Barahona,PYME,2024-01-24
+11,Patricia Jiménez,La Romana,Corporativo,2024-02-21
+12,Clínica Pérez Corp.,Baní,PYME,2024-06-30
+13,Isabel Santos,Bonao,Corporativo,2024-09-30
+14,Pedro Rivera,Barahona,Individual,2024-11-23
+15,Rosa Hernández,Puerto Plata,Individual,2024-04-27
+16,Daniela Rivera,San Cristóbal,Retail,2024-04-18
+17,Patricia Gómez,Puerto Plata,PYME,2024-07-21
+18,Raúl Aquino,Moca,Retail,2024-05-06
+19,Pedro Gómez,La Vega,Retail,2024-10-25
+20,Ana Gómez,Baní,PYME,2024-02-16
+21,Felipe Pérez,Bonao,Retail,2025-02-09
+22,Sofía Aquino,La Vega,Individual,2024-11-01
+23,Raúl Aquino,Azua,Corporativo,2024-12-14
+24,Isabel Santos,Santo Domingo,Corporativo,2024-02-27
+25,Sofía Martínez,Barahona,Corporativo,2024-09-13
+26,Eduardo Gómez,San Francisco de Macorís,PYME,2024-11-23
+27,Sofía Ramírez,San Pedro de Macorís,Corporativo,2024-10-03
+28,Inversiones Núñez S.A.,Santo Domingo,PYME,2024-09-07
+29,Juan Díaz,Barahona,Individual,2024-10-17
+30,Luis Gómez,Baní,Retail,2025-01-24
+31,Importadora Torres Group,San Cristóbal,PYME,2024-10-08
+32,José Santos,Monte Cristi,Retail,2024-12-31
+33,Comercial Rivera SRL,San Pedro de Macorís,PYME,2024-03-02
+34,Comercial Fernández S.A.,Santiago,Individual,2024-10-28
+35,Ferretería Aquino Group,San Cristóbal,PYME,2024-06-18
+36,Daniela Vásquez,Higüey,PYME,2025-01-05
+37,Andrés Castillo,Santiago,Individual,2025-02-05
+38,Andrés Rodríguez,Higüey,Individual,2024-12-03
+39,Ana Fernández,Bonao,Corporativo,2024-12-10
+40,Pedro Castillo,San Cristóbal,Retail,2025-02-13
+41,Laura Santos,San Cristóbal,Individual,2024-03-12
+42,Raúl Martínez,Santo Domingo,Individual,2024-08-14
+43,Pedro Santana,Bonao,Retail,2024-02-17
+44,Servicios Fernández S.A.,Bonao,Individual,2024-09-03
+45,Patricia Núñez,Bonao,Retail,2024-07-18
+46,Ferretería Fernández Corp.,Moca,Individual,2024-03-20
+47,María Vásquez,Higüey,PYME,2025-01-17
+48,Juan Santana,Santiago,Individual,2024-01-30
+49,Carmen Martínez,Monte Cristi,PYME,2024-12-11
+50,Felipe Pérez,Bonao,Corporativo,2024-10-23
+51,Inversiones Guerrero EIRL,Bonao,PYME,2024-05-13
+52,Patricia Rivera,Monte Cristi,Individual,2024-12-09
+53,Daniela Martínez,Santiago,PYME,2024-01-05
+54,José Pérez,Monte Cristi,PYME,2024-09-16
+55,Patricia Morales,Moca,Corporativo,2024-07-08
+56,Sofía Ramírez,Baní,Corporativo,2024-11-09
+57,Distribuidora Aquino SRL,Monte Cristi,Individual,2024-12-05
+58,Laura Núñez,San Pedro de Macorís,PYME,2025-01-15
+59,Laura Reyes,Higüey,Corporativo,2025-01-02
+60,Servicios Aquino SRL,Santo Domingo,Corporativo,2024-01-27
+61,Clínica Santana Group,La Vega,Retail,2025-01-29
+62,Comercial Gómez Corp.,Santo Domingo,Corporativo,2024-10-14
+63,Andrés Gómez,Santo Domingo,Corporativo,2024-10-25
+64,María Jiménez,San Cristóbal,PYME,2024-07-05
+65,Importadora Rodríguez Corp.,Moca,PYME,2024-12-07
+66,Isabel Rodríguez,Santo Domingo,PYME,2024-05-01
+67,Andrés Guerrero,Puerto Plata,PYME,2025-01-12
+68,Carmen Fernández,Barahona,Retail,2025-02-07
+69,Soluciones Jiménez EIRL,Barahona,PYME,2024-04-23
+70,Ferretería Hernández EIRL,Puerto Plata,Individual,2024-04-24
+71,Sofía Hernández,Baní,Corporativo,2025-01-30
+72,Clínica Santana Corp.,Puerto Plata,Individual,2024-01-15
+73,José Rivera,Bonao,Individual,2024-02-25
+74,Eduardo Aquino,Santo Domingo,Retail,2024-07-16
+75,Raúl Castillo,San Francisco de Macorís,Retail,2024-01-01
+76,Rosa Torres,San Francisco de Macorís,Individual,2024-02-05
+77,Sofía Núñez,Baní,Retail,2025-01-03
+78,Miguel Morales,La Romana,PYME,2024-06-16
+79,Carmen Santana,San Pedro de Macorís,Corporativo,2024-08-03
+80,Carlos Núñez,Puerto Plata,PYME,2024-07-26
+81,Felipe Rivera,Higüey,Retail,2024-08-08
+82,Sofía Díaz,Azua,PYME,2024-08-14
+83,Importadora Torres EIRL,Santiago,PYME,2024-12-03
+84,Eduardo Gómez,Santo Domingo,Individual,2024-12-10
+85,Felipe Pérez,Higüey,Retail,2024-05-05
+86,Carmen Díaz,Bonao,PYME,2024-11-18
+87,Carlos Martínez,Azua,Retail,2024-03-16
+88,Importadora Santos SRL,La Vega,PYME,2024-04-22
+89,Patricia Reyes,La Vega,Corporativo,2024-03-03
+90,Felipe Reyes,Bonao,Retail,2025-01-21
+91,Jorge Santos,Puerto Plata,PYME,2024-03-22
+92,Sofía Díaz,Baní,PYME,2024-11-22
+93,Miguel Guerrero,Puerto Plata,Corporativo,2024-05-20
+94,Juan Gómez,La Romana,PYME,2024-06-12
+95,Eduardo Pérez,Bonao,Retail,2024-07-15
+96,Andrés Fernández,San Cristóbal,Retail,2024-06-18
+97,Daniela Ramírez,Barahona,Retail,2024-07-18
+98,Inversiones Núñez Group,Barahona,Retail,2024-09-01
+99,Raúl Torres,Monte Cristi,PYME,2024-10-02
+100,Servicios Díaz SRL,Bonao,Corporativo,2024-09-06
+101,Carmen Santana,Barahona,Retail,2024-12-08
+102,Raúl Ramírez,Monte Cristi,Retail,2024-03-06
+103,Carlos Pérez,Baní,Retail,2024-10-30
+104,Isabel Fernández,Puerto Plata,Retail,2024-03-10
+105,Inversiones Rivera Group,Puerto Plata,Retail,2024-06-16
+106,Jorge Ramírez,Moca,Individual,2024-05-09
+107,Comercial Fernández SRL,San Cristóbal,PYME,2024-06-28
+108,Pedro Gómez,Higüey,Individual,2024-01-11
+109,Patricia Aquino,Azua,Corporativo,2024-10-15
+110,Ana Santana,Puerto Plata,Individual,2024-03-26
+111,Clínica Vásquez Group,Bonao,PYME,2024-10-23
+112,Pedro Martínez,Moca,Corporativo,2024-02-08
+113,Ana Vásquez,Azua,Individual,2024-12-16
+114,José Pérez,La Vega,Corporativo,2024-06-26
+115,Jorge Martínez,Bonao,Corporativo,2024-01-07
+116,Patricia Gómez,Bonao,PYME,2024-11-21
+117,Laura Torres,Azua,Retail,2025-01-10
+118,Daniela Aquino,San Francisco de Macorís,PYME,2024-08-26
+119,Patricia Guerrero,Azua,Retail,2024-02-14
+120,Carmen Rivera,Santo Domingo,Retail,2024-10-18
+121,Ferretería Jiménez EIRL,San Francisco de Macorís,Corporativo,2024-06-15
+122,Laura Morales,Santo Domingo,PYME,2024-11-01
+123,Servicios Díaz Corp.,Azua,PYME,2024-02-13
+124,Jorge Santos,Azua,Individual,2024-12-19
+125,Carmen Guerrero,Puerto Plata,Corporativo,2024-02-17
+126,José Rodríguez,Moca,Corporativo,2024-08-30
+127,Laura Núñez,Puerto Plata,PYME,2024-06-29
+128,Rosa Martínez,Moca,PYME,2024-03-02
+129,Soluciones Aquino Corp.,Azua,Corporativo,2024-04-08
+130,Miguel Guerrero,San Francisco de Macorís,PYME,2024-02-21
+131,Importadora Gómez EIRL,Santo Domingo,Individual,2024-06-03
+132,Luis Díaz,Santiago,Individual,2024-10-10
+133,Jorge Santos,San Francisco de Macorís,PYME,2024-10-20
+134,Jorge Martínez,Barahona,Individual,2024-01-27
+135,Daniela Fernández,La Romana,PYME,2024-07-24
+136,Miguel Pérez,San Cristóbal,Individual,2025-02-19
+137,Felipe Torres,Azua,PYME,2024-10-12
+138,Patricia Santos,Puerto Plata,Retail,2025-02-01
+139,María Torres,Moca,Individual,2024-06-05
+140,Ferretería Aquino SRL,La Romana,PYME,2025-01-25
+141,Isabel Ramírez,Bonao,Retail,2024-03-29
+142,Miguel Fernández,San Cristóbal,Corporativo,2024-12-18
+143,Patricia Pérez,Baní,PYME,2024-12-27
+144,Daniela Castillo,Bonao,Individual,2024-05-15
+145,Distribuidora Aquino S.A.,Santiago,Individual,2024-10-05
+146,Felipe Vásquez,Monte Cristi,Corporativo,2024-03-25
+147,Clínica Hernández EIRL,La Vega,Retail,2024-08-12
+148,Grupo Rodríguez EIRL,San Pedro de Macorís,Corporativo,2024-08-12
+149,Constructora Vásquez SRL,Azua,Corporativo,2024-01-14
+150,Distribuidora Díaz Corp.,Baní,Retail,2024-10-22
+151,Constructora Rodríguez Group,Santiago,Retail,2024-05-22
+152,Rosa Martínez,Barahona,PYME,2024-06-27
+153,Jorge Núñez,Baní,Retail,2024-06-17
+154,María Santos,Santiago,Corporativo,2025-02-20
+155,Carmen Reyes,Barahona,Individual,2024-05-09
+156,Patricia Rodríguez,Santo Domingo,PYME,2024-12-02
+157,Jorge Santos,Azua,Individual,2024-09-22
+158,Luis Núñez,Higüey,Retail,2024-04-14
+159,Constructora Guerrero S.A.,Puerto Plata,Individual,2024-03-03
+160,Pedro Martínez,Higüey,Individual,2024-10-09
+161,Jorge Núñez,La Vega,Corporativo,2024-11-27
+162,Jorge Guerrero,Higüey,PYME,2024-07-31
+163,Constructora Reyes S.A.,Barahona,Individual,2024-07-15
+164,Andrés Rivera,Monte Cristi,Corporativo,2024-05-21
+165,Clínica Vásquez Corp.,Baní,Retail,2025-02-24
+166,Jorge Jiménez,San Francisco de Macorís,Retail,2024-03-17
+167,Eduardo Guerrero,San Pedro de Macorís,Retail,2024-08-21
+168,Andrés Fernández,San Francisco de Macorís,Retail,2024-04-29
+169,Carmen Hernández,Baní,PYME,2024-12-27
+170,Luis Reyes,San Pedro de Macorís,Corporativo,2024-09-10
+171,Patricia Martínez,La Vega,Retail,2024-02-21
+172,Andrés Gómez,Santiago,Retail,2024-01-08
+173,Rosa Torres,Moca,Retail,2025-02-04
+174,Inversiones Morales Group,San Francisco de Macorís,Retail,2024-11-28
+175,Comercial Guerrero EIRL,San Cristóbal,Individual,2024-10-04
+176,Ana Santos,La Romana,Corporativo,2024-08-10
+177,Grupo Núñez EIRL,San Francisco de Macorís,Retail,2024-01-15
+178,Servicios Vásquez S.A.,La Romana,PYME,2024-03-15
+179,Carmen Torres,Baní,PYME,2024-02-10
+180,Luis Guerrero,Higüey,Corporativo,2024-09-11
+181,Carlos Santos,Monte Cristi,Corporativo,2024-08-23
+182,Juan Santos,San Francisco de Macorís,Corporativo,2024-12-12
+183,Laura Santos,Barahona,Corporativo,2024-11-23
+184,Jorge Martínez,San Cristóbal,Retail,2024-04-11
+185,Miguel Núñez,Santo Domingo,Retail,2024-10-19
+186,Grupo Torres Group,Barahona,Corporativo,2024-05-20
+187,Felipe Jiménez,San Cristóbal,PYME,2025-02-01
+188,Luis Martínez,Monte Cristi,Individual,2024-11-13
+189,María Vásquez,San Francisco de Macorís,PYME,2024-06-07
+190,Rosa Rodríguez,La Romana,PYME,2024-02-16
+191,José Reyes,La Vega,Corporativo,2024-03-08
+192,Jorge Núñez,Moca,Corporativo,2024-03-25
+193,Comercial Gómez S.A.,Barahona,Retail,2025-02-15
+194,Juan Hernández,Santo Domingo,Corporativo,2025-02-15
+195,Inversiones Aquino Corp.,Bonao,Corporativo,2024-10-01
+196,Jorge Ramírez,San Pedro de Macorís,Corporativo,2024-02-25
+197,Comercial Santos EIRL,Baní,Retail,2024-11-08
+198,Grupo Núñez Group,Santiago,Individual,2024-02-29
+199,Luis Hernández,Higüey,Corporativo,2024-04-30
+200,Raúl Rodríguez,San Pedro de Macorís,PYME,2024-12-09
+201,Jorge Torres,Bonao,Corporativo,2024-07-31
+202,Eduardo Santos,Higüey,PYME,2024-01-17
+203,Inversiones Morales EIRL,Santo Domingo,Retail,2024-07-04
+204,Comercial Santos SRL,Baní,PYME,2024-05-21
+205,Carlos Fernández,Azua,Corporativo,2024-11-24
+206,Daniela Castillo,Santiago,PYME,2024-05-04
+207,Ferretería Rivera S.A.,Azua,Individual,2024-10-27
+208,Luis Gómez,La Vega,Corporativo,2024-05-21
+209,Grupo Gómez SRL,San Francisco de Macorís,PYME,2025-02-12
+210,Isabel Aquino,Santo Domingo,PYME,2024-10-28
+211,Ana Pérez,Higüey,Retail,2025-01-14
+212,Daniela Martínez,Higüey,PYME,2025-02-02
+213,Importadora Núñez Group,Baní,Individual,2024-11-10
+214,Carmen Rodríguez,Baní,Individual,2024-02-01
+215,Patricia Pérez,Monte Cristi,Individual,2024-09-08
+216,Juan Gómez,Puerto Plata,Corporativo,2024-06-13
+217,Sofía Núñez,Higüey,Retail,2024-07-14
+218,Ana Morales,Moca,PYME,2024-02-20
+219,Pedro Rodríguez,San Francisco de Macorís,Retail,2024-08-08
+220,Ana Rivera,Bonao,Corporativo,2024-07-23
+221,   ,Santo Domingo,PYME,2025/01/20
+222,Inversiones del Este,,Corporativo,
+223,,Santiago,Retail,20-01-2025
