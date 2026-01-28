@@ -318,6 +318,8 @@ if __name__ == "__main__":
 
 </details>
 
+<details>
+
 <summary><code>Style/Global.css</code></summary>
 
 ```jsx
@@ -447,7 +449,6 @@ if __name__ == "__main__":
   }
 }
 ```
-
 </details>
 
 <details>
