@@ -1,85 +1,115 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { clientes as mockClientes, type Cliente } from "@/lib/data"
+import { supabase } from "@/supabase/client"
+
+export interface Cliente {
+  cliente_id: number
+  nombre: string
+  ciudad: string | null
+  segmento: string | null
+  fecha_registro: string | null
+}
 
 interface UseClientesReturn {
   clientes: Cliente[]
   isLoading: boolean
   error: string | null
-  refetch: () => void
-  getClienteById: (id: number) => Cliente | undefined
-  getClientesPorSegmento: () => { segmento: string; count: number }[]
-  getClientesPorCiudad: () => { ciudad: string; count: number }[]
+  refetch: () => Promise<void>
   totalClientes: number
+  clientesPorSegmento: { segmento: string; count: number }[]
+  clientesPorCiudad: { ciudad: string; count: number }[]
+  page: number
+  setPage: (p: number) => void
+  pageSize: number
+  setPageSize: (size: number) => void
+  totalCount: number
 }
 
-export function useClientes(): UseClientesReturn {
+export function useClientes(initialPage = 1, initialPageSize = 10): UseClientesReturn {
   const [clientes, setClientes] = useState<Cliente[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [page, setPage] = useState(initialPage)
+  const [pageSize, setPageSize] = useState(initialPageSize)
+  const [totalCount, setTotalCount] = useState(0)
+  const [clientesPorSegmento, setClientesPorSegmento] = useState<{ segmento: string; count: number }[]>([])
+  const [clientesPorCiudad, setClientesPorCiudad] = useState<{ ciudad: string; count: number }[]>([])
+  const [totalClientes, setTotalClientes] = useState(0)
 
-  const fetchClientes = useCallback(async () => {
-    setIsLoading(true)
-    setError(null)
+  const fetchStats = useCallback(async () => {
     try {
-      // Simular delay de red
-      await new Promise((resolve) => setTimeout(resolve, 500))
-      
-      // TODO: Reemplazar con llamada a Supabase cuando se conecte
-      // const { data, error } = await supabase.from('clientes').select('*')
-      // if (error) throw error
-      // setClientes(data)
-      
-      setClientes(mockClientes)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al cargar clientes")
-    } finally {
-      setIsLoading(false)
+      // Traemos todos los clientes solo para calcular estadísticas
+      const { data, error } = await supabase
+        .from("clientes")
+        .select("*", { count: "exact" })
+
+      if (error) throw error
+
+      const allClientes = data ?? []
+      setTotalClientes(allClientes.length)
+
+      // Segmentos
+      const segMap = new Map<string, number>()
+      const ciudadMap = new Map<string, number>()
+
+      allClientes.forEach((c) => {
+        if (c.segmento) segMap.set(c.segmento, (segMap.get(c.segmento) || 0) + 1)
+        if (c.ciudad) ciudadMap.set(c.ciudad, (ciudadMap.get(c.ciudad) || 0) + 1)
+      })
+
+      setClientesPorSegmento(Array.from(segMap.entries()).map(([segmento, count]) => ({ segmento, count })))
+      setClientesPorCiudad(Array.from(ciudadMap.entries()).map(([ciudad, count]) => ({ ciudad, count })))
+    } catch (err: any) {
+      console.error("Error fetchStats:", err.message)
     }
   }, [])
 
+  const fetchClientesPage = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const from = (page - 1) * pageSize
+      const to = page * pageSize - 1
+
+      const { data, count, error } = await supabase
+        .from("clientes")
+        .select("*", { count: "exact" })
+        .range(from, to)
+
+      if (error) throw error
+
+      setClientes(data ?? [])
+      if (count !== null) setTotalCount(count)
+    } catch (err: any) {
+      setError(err.message ?? "Error al cargar clientes")
+    } finally {
+      setIsLoading(false)
+    }
+  }, [page, pageSize])
+
+  const refetch = useCallback(async () => {
+    await fetchStats()
+    await fetchClientesPage()
+  }, [fetchStats, fetchClientesPage])
+
   useEffect(() => {
-    fetchClientes()
-  }, [fetchClientes])
-
-  const getClienteById = useCallback(
-    (id: number) => clientes.find((c) => c.cliente_id === id),
-    [clientes]
-  )
-
-  const getClientesPorSegmento = useCallback(() => {
-    const segmentoMap = new Map<string, number>()
-    for (const cliente of clientes) {
-      const existing = segmentoMap.get(cliente.segmento) || 0
-      segmentoMap.set(cliente.segmento, existing + 1)
-    }
-    return Array.from(segmentoMap.entries()).map(([segmento, count]) => ({
-      segmento,
-      count,
-    }))
-  }, [clientes])
-
-  const getClientesPorCiudad = useCallback(() => {
-    const ciudadMap = new Map<string, number>()
-    for (const cliente of clientes) {
-      const existing = ciudadMap.get(cliente.ciudad) || 0
-      ciudadMap.set(cliente.ciudad, existing + 1)
-    }
-    return Array.from(ciudadMap.entries()).map(([ciudad, count]) => ({
-      ciudad,
-      count,
-    }))
-  }, [clientes])
+    refetch()
+  }, [refetch, page, pageSize])
 
   return {
     clientes,
     isLoading,
     error,
-    refetch: fetchClientes,
-    getClienteById,
-    getClientesPorSegmento,
-    getClientesPorCiudad,
-    totalClientes: clientes.length,
+    refetch,
+    totalClientes,
+    clientesPorSegmento,
+    clientesPorCiudad,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalCount,
   }
 }

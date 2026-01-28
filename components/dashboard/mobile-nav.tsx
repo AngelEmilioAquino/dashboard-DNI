@@ -11,15 +11,10 @@ import {
 import {
   LayoutDashboard,
   Receipt,
-  FileText,
-  FolderOpen,
   Store,
-  Bell,
-  User,
-  Settings,
-  LogOut,
   Users,
   Menu,
+  Logs,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -32,12 +27,8 @@ const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "ventas", label: "Ventas", icon: Receipt },
   { id: "clientes", label: "Clientes", icon: Users },
-  { id: "reportes", label: "Reportes", icon: FileText },
-  { id: "documentos", label: "Documentos", icon: FolderOpen },
-  { id: "tienda", label: "Tienda", icon: Store },
-  { id: "notificaciones", label: "Notificaciones", icon: Bell },
-  { id: "perfil", label: "Perfil", icon: User },
-  { id: "ajustes", label: "Ajustes", icon: Settings },
+  { id: "AuditoriaVentas", label: "Auditoria Ventas", icon: Logs },
+  { id: "AuditoriaClientes", label: "Auditoria Clientes", icon: Logs },
 ]
 
 export function MobileNav({ activeItem, onItemClick }: MobileNavProps) {

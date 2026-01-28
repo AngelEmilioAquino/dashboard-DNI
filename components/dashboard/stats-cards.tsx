@@ -4,6 +4,8 @@ import React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { TrendingUp, Users, ShoppingCart, DollarSign } from "lucide-react"
 import { getTotalVentas, getTotalClientes, ventas } from "@/lib/data"
+import { useVentas } from "@/hooks/use-ventas"
+import { useClientes } from "@/hooks/use-clientes"
 
 interface StatCardProps {
   title: string
@@ -43,21 +45,14 @@ function StatCard({ title, value, percentage, icon, iconBg, trend }: StatCardPro
 }
 
 export function StatsCards() {
-  const totalVentas = getTotalVentas()
-  const totalClientes = getTotalClientes()
-  const totalTransacciones = ventas.length
-
-  const formatValue = (value: number) => {
-    if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
-    if (value >= 1000) return `$${(value / 1000).toFixed(0)}k`
-    return `$${value}`
-  }
+  const {ventas,sumaVentas,totalVentas} = useVentas()
+  const {totalClientes} = useClientes()
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 sm:gap-4">
       <StatCard
         title="Total Ventas"
-        value={formatValue(totalVentas)}
+        value={sumaVentas.toLocaleString("es-DO", { style: "currency", currency: "DOP" })}
         percentage={80}
         icon={<DollarSign className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />}
         iconBg="bg-primary/10"
@@ -73,7 +68,7 @@ export function StatsCards() {
       />
       <StatCard
         title="Transacciones"
-        value={`${totalTransacciones}+`}
+        value={`${totalVentas}+`}
         percentage={20}
         icon={<ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6 text-chart-3" />}
         iconBg="bg-chart-3/10"

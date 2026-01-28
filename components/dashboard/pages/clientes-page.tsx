@@ -13,43 +13,82 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Search, Filter, Download, RefreshCw, UserPlus } from "lucide-react"
-import { useState } from "react"
+import { Search, Download, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useMemo } from "react"
 
 export function ClientesPage() {
-  const { clientes, isLoading, refetch, totalClientes, getClientesPorSegmento, getClientesPorCiudad } = useClientes()
+  const {
+    clientes,
+    isLoading,
+    refetch,
+    totalClientes,
+    clientesPorSegmento,
+    clientesPorCiudad,
+    page,
+    setPage,
+    pageSize,
+    setPageSize,
+    totalCount,
+  } = useClientes()
+
   const [searchTerm, setSearchTerm] = useState("")
 
-  const filteredClientes = clientes.filter(
-    (cliente) =>
-      cliente.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cliente.ciudad.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cliente.segmento.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // Filtro de búsqueda sobre la página actual
+  const filteredClientes = useMemo(() => {
+    return clientes.filter(
+      (cliente) =>
+        cliente.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cliente.ciudad?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cliente.segmento?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [clientes, searchTerm])
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("es-DO", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  }
+  const formatDate = (dateStr?: string | null) =>
+    dateStr
+      ? new Date(dateStr).toLocaleDateString("es-DO", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })
+      : "-"
 
-  const getSegmentoBadgeColor = (segmento: string) => {
-    switch (segmento.toLowerCase()) {
+  const getSegmentoBadgeColor = (segmento?: string | null) => {
+    switch (segmento?.toLowerCase()) {
       case "corporativo":
         return "bg-purple-100 text-purple-700"
       case "retail":
         return "bg-blue-100 text-blue-700"
       case "individual":
         return "bg-green-100 text-green-700"
+      case "PYME":
+        return "bg-yellow-100 text-yellow-700"
       default:
         return "bg-gray-100 text-gray-700"
     }
   }
 
-  const segmentos = getClientesPorSegmento()
-  const ciudades = getClientesPorCiudad()
+  // Descarga de clientes filtrados en CSV
+  const handleDownload = () => {
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      ["ID,Nombre,Ciudad,Segmento,Fecha Registro"]
+        .concat(
+          clientes.map(
+            (c) =>
+              `${c.cliente_id},"${c.nombre}",${c.ciudad ?? ""},${c.segmento ?? ""},${c.fecha_registro ?? ""}`
+          )
+        )
+        .join("\n")
+    const encodedUri = encodeURI(csvContent)
+    const link = document.createElement("a")
+    link.setAttribute("href", encodedUri)
+    link.setAttribute("download", "clientes.csv")
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const totalPages = Math.ceil(totalCount / pageSize)
 
   if (isLoading) {
     return (
@@ -63,13 +102,7 @@ export function ClientesPage() {
     <div className="space-y-4 sm:space-y-6">
       {/* Stats Row */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        <Card className="bg-card rounded-2xl border-0 shadow-sm">
-          <CardContent className="p-4 sm:p-6">
-            <p className="text-xs sm:text-sm text-muted-foreground">Total Clientes</p>
-            <p className="text-xl sm:text-2xl font-bold text-foreground">{totalClientes}</p>
-          </CardContent>
-        </Card>
-        {segmentos.slice(0, 3).map((seg) => (
+        {clientesPorSegmento.slice(0, 4).map((seg) => (
           <Card key={seg.segmento} className="bg-card rounded-2xl border-0 shadow-sm">
             <CardContent className="p-4 sm:p-6">
               <p className="text-xs sm:text-sm text-muted-foreground truncate">{seg.segmento}</p>
@@ -94,18 +127,11 @@ export function ClientesPage() {
               />
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" className="rounded-xl bg-transparent h-9 w-9">
-                <Filter className="h-4 w-4" />
-              </Button>
               <Button variant="outline" size="icon" className="rounded-xl bg-transparent h-9 w-9" onClick={refetch}>
                 <RefreshCw className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="icon" className="rounded-xl bg-transparent h-9 w-9">
+              <Button variant="outline" size="icon" className="rounded-xl bg-transparent h-9 w-9" onClick={handleDownload}>
                 <Download className="h-4 w-4" />
-              </Button>
-              <Button className="rounded-xl gap-2 h-9 px-3 hidden sm:flex">
-                <UserPlus className="h-4 w-4" />
-                <span className="hidden md:inline">Nuevo</span>
               </Button>
             </div>
           </div>
@@ -139,6 +165,27 @@ export function ClientesPage() {
               </TableBody>
             </Table>
           </div>
+
+          {/* Paginación */}
+          <div className="flex justify-end items-center gap-2 p-4">
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={page <= 1}
+              onClick={() => setPage(page - 1)}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <span className="text-sm">{page} / {totalPages}</span>
+            <Button
+              variant="outline"
+              size="icon"
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
@@ -149,7 +196,7 @@ export function ClientesPage() {
         </CardHeader>
         <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
           <div className="flex flex-wrap gap-2 sm:gap-3">
-            {ciudades.map((ciudad) => (
+            {clientesPorCiudad.map((ciudad) => (
               <div
                 key={ciudad.ciudad}
                 className="flex items-center gap-2 bg-secondary rounded-xl px-3 py-2 sm:px-4"
@@ -166,3 +213,4 @@ export function ClientesPage() {
     </div>
   )
 }
+

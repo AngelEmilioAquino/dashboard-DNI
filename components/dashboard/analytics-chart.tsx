@@ -8,7 +8,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart"
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
-import { getVentasPorCanal } from "@/lib/data"
+import { useVentas } from "@/hooks/use-ventas"
 
 const chartConfig = {
   total: {
@@ -18,21 +18,24 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function AnalyticsChart() {
-  const data = getVentasPorCanal().map(item => ({
-    ...item,
-    canal: item.canal.charAt(0).toUpperCase() + item.canal.slice(1)
-  }))
+  const { ventasCanal } = useVentas()
+
+  // Formatear los datos para el gráfico
+  const data = ventasCanal.map(v => ({ 
+    canal: v.canal.charAt(0).toUpperCase() + v.canal.slice(1), // Capitaliza el nombre del canal
+    total: v.total 
+  }));
 
   const formatCurrencyShort = (value: number) => {
-    if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`
-    if (value >= 1000) return `$${(value / 1000).toFixed(0)}k`
-    return `$${value}`
+    if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`;
+    if (value >= 1000) return `$${(value / 1000).toFixed(0)}k`;
+    return `$${value}`;
   }
 
   return (
     <Card className="border-0 shadow-sm h-full">
       <CardHeader className="p-4 sm:p-6 sm:pb-2">
-        <CardTitle className="text-base sm:text-lg font-semibold">Analisis por Canal</CardTitle>
+        <CardTitle className="text-base sm:text-lg font-semibold">Análisis por Canal</CardTitle>
       </CardHeader>
       <CardContent className="p-2 sm:p-6 sm:pt-0">
         <ChartContainer config={chartConfig} className="h-[160px] sm:h-[200px] w-full">

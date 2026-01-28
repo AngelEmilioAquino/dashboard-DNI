@@ -6,18 +6,15 @@ import { Header } from "@/components/dashboard/header"
 import { DashboardHome } from "@/components/dashboard/pages/dashboard-home"
 import { VentasPage } from "@/components/dashboard/pages/ventas-page"
 import { ClientesPage } from "@/components/dashboard/pages/clientes-page"
-import { ReportesPage } from "@/components/dashboard/pages/reportes-page"
+import { AuditoriaPage } from "@/components/dashboard/pages/auditoria-page"
+import { AuditoriaClientePage } from "@/components/dashboard/pages/auditoria-clientes"
 
 const pageTitles: Record<string, string> = {
   dashboard: "Dashboard",
   ventas: "Ventas",
   clientes: "Clientes",
-  reportes: "Reportes",
-  documentos: "Documentos",
-  tienda: "Tienda",
-  notificaciones: "Notificaciones",
-  perfil: "Perfil",
-  ajustes: "Ajustes",
+  AuditoriaVentas: "Auditoria de Ventas",
+  AuditoriaClientes: "Auditoria de Clientes",
 }
 
 export default function DashboardPage() {
@@ -31,8 +28,10 @@ export default function DashboardPage() {
         return <VentasPage />
       case "clientes":
         return <ClientesPage />
-      case "reportes":
-        return <ReportesPage />
+      case "AuditoriaVentas":
+        return <AuditoriaPage />
+      case "AuditoriaClientes":
+        return <AuditoriaClientePage />
       default:
         return (
           <div className="flex items-center justify-center h-64 rounded-2xl bg-card text-muted-foreground">

@@ -3,12 +3,8 @@ import { cn } from "@/lib/utils"
 import {
   LayoutDashboard,
   Receipt,
-  FileText,
-  FolderOpen,
   Store,
-  Bell,
-  User,
-  Settings,
+  Logs,
   Users,
 } from "lucide-react"
 
@@ -21,8 +17,8 @@ const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
   { id: "ventas", label: "Ventas", icon: Receipt },
   { id: "clientes", label: "Clientes", icon: Users },
-  { id: "reportes", label: "Reportes", icon: FileText },
-  { id: "documentos", label: "Documentos", icon: FolderOpen },
+  { id: "AuditoriaVentas", label: "Auditoria Ventas", icon: Logs },
+  { id: "AuditoriaClientes", label: "Auditoria Clientes", icon: Logs },
 ]
 
 export function Sidebar({ activeItem, onItemClick }: SidebarProps) {

@@ -8,7 +8,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart"
 import { Cell, Pie, PieChart, Label } from "recharts"
-import { getClientesPorSegmento, getTotalClientes } from "@/lib/data"
+import { useClientes } from "@/hooks/use-clientes"
 
 const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)"]
 
@@ -25,16 +25,18 @@ const chartConfig = {
     label: "Corporativo",
     color: "var(--chart-3)",
   },
+  PYME: {
+    label: "PYME",
+    color: "var(--chart-4)",
+  }
 } satisfies ChartConfig
 
 export function SegmentChart() {
-  const data = getClientesPorSegmento()
-  const totalClientes = getTotalClientes()
+  const { clientesPorSegmento, totalClientes } = useClientes()
 
   // Calculate percentage for the main segment
-  const mainSegment = data.reduce((max, item) => 
-    item.count > max.count ? item : max, data[0])
-  const mainPercentage = Math.round((mainSegment.count / totalClientes) * 100)
+  const mainSegment = clientesPorSegmento.reduce((max, item) => 
+    item.count > max.count ? item : max, clientesPorSegmento[0])
 
   return (
     <Card className="border-0 shadow-sm h-full">
@@ -48,7 +50,7 @@ export function SegmentChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={data}
+              data={clientesPorSegmento}
               dataKey="count"
               nameKey="segmento"
               innerRadius={45}
@@ -56,7 +58,7 @@ export function SegmentChart() {
               strokeWidth={4}
               stroke="var(--card)"
             >
-              {data.map((entry, index) => (
+              {clientesPorSegmento.map((entry, index) => (
                 <Cell key={`cell-${entry.segmento}`} fill={COLORS[index % COLORS.length]} />
               ))}
               <Label
@@ -71,17 +73,17 @@ export function SegmentChart() {
                       >
                         <tspan
                           x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-2xl sm:text-3xl font-bold"
+                          dy="-4"
+                          className="fill-foreground text-md font-bold"
                         >
-                          {mainPercentage}%
+                          Conteo de
                         </tspan>
                         <tspan
                           x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 18}
-                          className="fill-muted-foreground text-[10px] sm:text-xs"
+                          dy="18"
+                          className="fill-muted-foreground text-[10px] sm:text-xs font-medium"
                         >
-                          {mainSegment.segmento}
+                          Segmento
                         </tspan>
                       </text>
                     )
@@ -93,7 +95,7 @@ export function SegmentChart() {
         </ChartContainer>
 
         <div className="mt-2 sm:mt-4 flex flex-wrap justify-center gap-3 sm:gap-6">
-          {data.map((item, index) => (
+          {clientesPorSegmento.map((item, index) => (
             <div key={item.segmento} className="flex items-center gap-2">
               <div
                 className="h-2 w-2 sm:h-3 sm:w-3 rounded-full flex-shrink-0"

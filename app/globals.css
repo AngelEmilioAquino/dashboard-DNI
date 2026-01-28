@@ -4,9 +4,15 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.97 0.01 280);
+  --background: linear-gradient(
+  135deg,
+  oklch(0.96 0.04 30),
+  oklch(0.94 0.06 280),
+  oklch(0.93 0.07 250)
+);
+
   --foreground: oklch(0.2 0.02 260);
-  --card: oklch(1 0 0);
+  --card: color-mix(in oklch, white 35%, transparent);
   --card-foreground: oklch(0.2 0.02 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.02 260);
@@ -29,7 +35,8 @@
   --chart-4: oklch(0.75 0.15 80);
   --chart-5: oklch(0.7 0.12 320);
   --radius: 1rem;
-  --sidebar: oklch(1 0 0);
+  --border: color-mix(in oklch, white 45%, transparent);
+  --sidebar: color-mix(in oklch, white 45%, transparent);
   --sidebar-foreground: oklch(0.2 0.02 260);
   --sidebar-primary: oklch(0.6 0.18 250);
   --sidebar-primary-foreground: oklch(1 0 0);
