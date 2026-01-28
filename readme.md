@@ -474,6 +474,8 @@ ADD CONSTRAINT ventas_cliente_fk
 FOREIGN KEY (cliente_id)
 REFERENCES public.clientes (cliente_id);
 ```
+</details>
+
 ## <a name="conclusion">🚀 Conclusión</a>
 
 El **Dashboard DNI** representa una solución completa para la carga, limpieza, normalización y explotación de datos provenientes de fuentes externas, cumpliendo con los objetivos establecidos en la prueba técnica. El proyecto integra de manera efectiva procesos de tratamiento de datos con una capa de visualización moderna y funcional.
