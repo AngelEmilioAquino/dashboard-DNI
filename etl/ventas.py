@@ -3,10 +3,10 @@ from sqlalchemy import create_engine
 from urllib.parse import quote_plus
 
 # Config DB
-PASSWORD = quote_plus("qluHbPH6hSdFQGLO")
+PASSWORD = quote_plus("YourStrongPasswordHere")
 DATABASE_URL = (
     f"postgresql+psycopg2://"
-    f"postgres.wsizxuskxyozvoakfenj:{PASSWORD}"
+    f"postgres.wsizxuskxyozvoakfe:{PASSWORD}"
     f"@aws-1-us-east-1.pooler.supabase.com:5432/postgres"
 )
 engine = create_engine(DATABASE_URL)

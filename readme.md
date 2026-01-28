@@ -127,7 +127,198 @@ Abrir [http://localhost:3000](http://localhost:3000) en el navegador para visual
 ## <a name="snippets">🕸️ Snippets</a>
 
 <details>
-<summary><code>Global.css</code></summary>
+
+<summary><code>etl/cliente.py</code></summary>
+
+```python
+
+import pandas as pd
+from sqlalchemy import create_engine
+from urllib.parse import quote_plus
+
+PASSWORD = quote_plus("YourStrongPasswordHere")
+DATABASE_URL = (
+    f"postgresql+psycopg2://"
+    f"postgres.wsizxuskxyozvoakfe:{PASSWORD}"
+    f"@aws-1-us-east-1.pooler.supabase.com:5432/postgres"
+)
+engine = create_engine(DATABASE_URL)
+
+# Leer RAW
+clientes = pd.read_sql("SELECT * FROM clientes_raw", engine)
+
+# Normalizar textos
+for col in clientes.select_dtypes(include="object").columns:
+    clientes[col] = clientes[col].astype(str).str.strip().str.upper()
+
+# Normalizar fechas
+if "fecha_registro" in clientes.columns:
+    clientes["fecha_registro"] = pd.to_datetime(
+        clientes["fecha_registro"],
+        errors="coerce"
+    )
+
+# Detectar errores
+clientes["error"] = False
+
+clientes.loc[clientes["cliente_id"].isna(), "error"] = True
+
+if "fecha_registro" in clientes.columns:
+    clientes.loc[clientes["fecha_registro"].isna(), "error"] = True
+
+# Separar
+clientes_errors = clientes[clientes["error"] == True]
+clientes_clean = clientes[clientes["error"] == False].drop(columns=["error"])
+
+# sin nulos
+clientes_clean["fecha_registro"] = clientes_clean["fecha_registro"].fillna("1900-01-01")
+
+for col in clientes_clean.select_dtypes(include="object").columns:
+    clientes_clean[col] = clientes_clean[col].replace("", "DESCONOCIDO")
+
+# Guardar
+clientes_clean.to_sql(
+    "clientes",
+    engine,
+    if_exists="append",
+    index=False
+)
+
+clientes_errors.to_sql(
+    "clientes_errors",
+    engine,
+    if_exists="append",
+    index=False
+)
+
+print("Clientes procesados correctamente")
+```
+</details>
+
+<details>
+
+<summary><code>etl/ventas.py</code></summary>
+
+```python
+
+import pandas as pd
+from sqlalchemy import create_engine
+from urllib.parse import quote_plus
+
+# Config DB
+PASSWORD = quote_plus("YourStrongPasswordHere")
+DATABASE_URL = (
+    f"postgresql+psycopg2://"
+    f"postgres.wsizxuskxyozvoakfe:{PASSWORD}"
+    f"@aws-1-us-east-1.pooler.supabase.com:5432/postgres"
+)
+engine = create_engine(DATABASE_URL)
+
+# Cargar RAW
+ventas = pd.read_sql("SELECT * FROM ventas_raw", engine)
+
+# Normalizar textos
+for col in ventas.select_dtypes(include="object").columns:
+    ventas[col] = ventas[col].astype(str).str.strip().str.upper()
+
+# Normalizar fechas
+ventas["fecha"] = pd.to_datetime(ventas["fecha"], errors="coerce")
+
+# Convertir total a numérico
+ventas["total"] = pd.to_numeric(ventas["total"], errors="coerce")
+
+# ==============================
+# Detectar errores y asignar motivo
+ventas["error_motivo"] = None
+
+ventas.loc[ventas["venta_id"].isna(), "error_motivo"] = "VENTA_ID_NULO"
+ventas.loc[ventas["cliente_id"].isna(), "error_motivo"] = "CLIENTE_ID_NULO"
+ventas.loc[ventas["fecha"].isna(), "error_motivo"] = "FECHA_INVALIDA"
+ventas.loc[ventas["total"].isna(), "error_motivo"] = "TOTAL_INVALIDO"
+ventas.loc[ventas["total"] < 0, "error_motivo"] = "TOTAL_NEGATIVO"
+
+# Separar clean de errors
+ventas_errors = ventas[ventas["error_motivo"].notna()]
+ventas_clean = ventas[ventas["error_motivo"].isna()]
+
+# Limpi columnas para DB
+ventas_errors = ventas_errors[
+    ["venta_id", "cliente_id", "fecha", "total", "moneda", "canal", "error_motivo"]
+]
+
+ventas_clean = ventas_clean[
+    ["venta_id", "cliente_id", "fecha", "total", "moneda", "canal"]
+]
+
+# rellenamos datos en ventas tanto en fechas como en totales
+ventas_clean["fecha"] = ventas_clean["fecha"].fillna("1900-01-01")
+ventas_clean["total"] = ventas_clean["total"].fillna(0)
+
+for col in ventas_clean.select_dtypes(include="object").columns:
+    ventas_clean[col] = ventas_clean[col].replace("", "DESCONOCIDO")
+
+# Guardar en DB
+ventas_clean.to_sql(
+    "ventas",
+    engine,
+    if_exists="replace",
+    index=False
+)
+
+ventas_errors.to_sql(
+    "ventas_errors",
+    engine,
+    if_exists="replace",
+    index=False
+)
+
+print("Ventas procesadas correctamente")
+print(f"{len(ventas_clean)} registros limpios")
+print(f"{len(ventas_errors)} registros con errores")
+```
+
+</details>
+
+<details>
+
+<summary><code>etl/load_raw.py</code></summary>
+
+```python
+
+import pandas as pd
+from sqlalchemy import create_engine
+from urllib.parse import quote_plus
+
+PASSWORD = quote_plus("YourStrongPasswordHere")
+DATABASE_URL = (
+    f"postgresql+psycopg2://"
+    f"postgres.wsizxuskxyozvoakfe:{PASSWORD}"
+    f"@aws-1-us-east-1.pooler.supabase.com:5432/postgres"
+)
+engine = create_engine(DATABASE_URL)
+
+
+def load_csv_to_raw(csv_path, table_name):
+    df = pd.read_csv(csv_path)
+
+    df.to_sql(
+        table_name,
+        engine,
+        if_exists="append",
+        index=False
+    )
+
+    print(f"Datos cargados en {table_name}")
+
+
+if __name__ == "__main__":
+    load_csv_to_raw("clientes.csv", "clientes_raw")
+    load_csv_to_raw("ventas.csv", "ventas_raw")
+```
+
+</details>
+
+<summary><code>Style/Global.css</code></summary>
 
 ```jsx
 @import 'tailwindcss';
