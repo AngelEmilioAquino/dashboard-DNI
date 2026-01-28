@@ -22,8 +22,9 @@ Prueba Técnica – Carga, Normalización y Explotación de Datos
 3. 🔋 [Características](#features)
 4. 🧠 [Arquitectura y Flujo](#arquitectura)
 5. 🤸 [Quick Start](#quick-start)
-6. 🗄️ [Modelo de Datos](#modelo)
-7. 🚀 [Conclusión](#conclusion)
+6. 🕸️ [Snippets (Code to Copy)](#snippets)
+7. 🗄️ [Modelo de Datos](#modelo)
+8. 🚀 [Conclusión](#conclusion)
 
 ---
 
@@ -81,13 +82,24 @@ Los errores no se eliminan, se almacenan con su motivo:
 
 <img src="public/Diagrama.png" alt="Diagrama de Arquitectura" />
 
+
+```bash
+src/
+ ├── components/      # Componentes reutilizables
+ ├── lib/             # Data Mockup
+ ├── public/          # Imágenes
+ ├── styles/          # Estilos globales
+ ├── App.jsx
+ └── main.jsx
+```
+
 ## <a name="quick-start">🤸 Quick Start</a>
 
 ### Prerrequisitos
 
-- Git
-- Node.js
-- npm
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
 
 ### Clonar repositorio
 
@@ -110,7 +122,7 @@ npm install
 npm run dev
 ```
 
-Abrir [http://localhost:5173](http://localhost:5173) en el navegador para visualizar el proyecto.
+Abrir [http://localhost:3000](http://localhost:3000) en el navegador para visualizar el proyecto.
 
 ## <a name="snippets">🕸️ Snippets</a>
 
@@ -368,464 +380,99 @@ export function getVentasRecientes(): (Venta & { cliente_nombre: string })[] {
 
 </details>
 
-> **IMPORTANT 👇**: The file should be named `index.jsx`, not `index.js` as demonstrated in the video. This change is necessary because we've added SVG components in the constants file.
+# <a name="modelo">🗄️ Modelo de Datos</a>
+
+<img src="public/diagramaER.png" alt="Diagrama de Entidad Relacion" />
 
 <details>
-<summary><code>constants/index.jsx</code></summary>
+<summary><code>Tables</code></summary>
 
-```jsx
-import { Linkedin, Github, MessageCircle, Globe } from "lucide-react";
+```sql
+CREATE TABLE clientes_raw (
+  id SERIAL PRIMARY KEY,
+  cliente_id TEXT,
+  nombre TEXT,
+  ciudad TEXT,
+  segmento TEXT,
+  fecha_registro TEXT
+);
 
-export const features = [
-  {
-    id: "0",
-    icon: "/images/feature-1.png",
-    caption: "Fácil de usar",
-    title: "Todos pueden ayudar",
-    text: "RoboTap es un robot de madera diseñado como punto de recolección de tapitas ubicado en el Edificio 2 de la UNPHU. Solo debes depositarlas dentro y cada tapita se convierte en apoyo para pacientes de quimioterapia.",
-    button: {
-      icon: "/images/magictouch.svg",
-      title: "Cómo aportar",
-      to: "Impacto", 
-    },
-  },
-  {
-    id: "1",
-    icon: "/images/feature-2.png",
-    caption: "Impacto transparente",
-    title: "Cada tapita cuenta",
-    text: "Las tapitas recolectadas se entregan a organizaciones que las reciclan y utilizan los fondos para apoyar importantes tratamientos de quimioterapia, llevando ayuda a quienes más la necesitan. Pequeñas acciones, grandes cambios.",
-    button: {
-      icon: "/images/docs.svg",
-      title: "Saber más",
-      to: "Preguntas Frecuentes", 
-    },
-  },
-];
+CREATE TABLE ventas_raw (
+  id SERIAL PRIMARY KEY,
+  venta_id TEXT,
+  cliente_id TEXT,
+  fecha TEXT,
+  total TEXT,
+  moneda TEXT,
+  canal TEXT
+);
 
+CREATE TABLE clientes (
+    cliente_id INT PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    ciudad TEXT NOT NULL,
+    segmento TEXT NOT NULL,
+    fecha_registro DATE NOT NULL
+);
 
-export const details = [
-  {
-    id: "0",
-    icon: "/images/detail-1.png",
-    title: "Recolección sencilla",
-  },
-  {
-    id: "1",
-    icon: "/images/detail-2.png",
-    title: "Diseño amigable",
-  },
-  {
-    id: "2",
-    icon: "/images/detail-3.png",
-    title: "Causa solidaria",
-  },
-  {
-    id: "3",
-    icon: "/images/detail-4.png",
-    title: "Impacto real",
-  },
-];
+CREATE TABLE ventas (
+    venta_id INT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    fecha DATE NOT NULL,
+    total NUMERIC(10,2) NOT NULL CHECK (total >= 0),
+    moneda TEXT NOT NULL,
+    canal TEXT NOT NULL,
 
+    CONSTRAINT fk_cliente
+        FOREIGN KEY (cliente_id)
+        REFERENCES clientes(cliente_id)
+);
 
-export const faq = [
-  {
-    id: "0",
-    question: "¿Qué es RoboTap?",
-    answer:
-      "RoboTap es una iniciativa comunitaria que recolecta tapitas plásticas para apoyar tratamientos de quimioterapia y promover el reciclaje responsable.",
-  },
-  {
-    id: "1",
-    question: "¿Cómo puedo ayudar?",
-    answer:
-      "Puedes ayudar recolectando tapitas, llevándolas a nuestros puntos de recolección, compartiendo el proyecto en redes sociales o uniéndote como voluntario.",
-  },
-  {
-    id: "2",
-    question: "¿Dónde puedo llevar las tapitas?",
-    answer:
-      "Contamos con puntos físicos de recolección, incluyendo centros educativos y aliados comunitarios. Puedes ver la ubicación exacta en la sección de impacto.",
-  },
-  {
-    id: "3",
-    question: "¿A quién se entregan las tapitas recolectadas?",
-    answer:
-      "Las tapitas se entregan a fundaciones aliadas que las transforman en fondos destinados directamente a tratamientos de quimioterapia.",
-  },
-  {
-    id: "4",
-    question: "¿El proyecto es transparente?",
-    answer:
-      "Sí. Trabajamos con organizaciones verificadas y compartimos el impacto del proyecto a través de nuestras redes y canales oficiales.",
-  },
-  {
-    id: "5",
-    question: "¿Puedo ser voluntario?",
-    answer:
-      "Claro que sí. Cualquier persona puede unirse como voluntario, sin importar la edad o experiencia previa.",
-  },
-  {
-    id: "6",
-    question: "¿RoboTap está en un lugar físico?",
-    answer:
-      "Sí, RoboTap cuenta con un punto físico dentro de la UNPHU para facilitar la recolección.",
-  },
-  {
-    id: "7",
-    question: "¿Tienen redes sociales oficiales?",
-    answer:
-      "Sí. Puedes seguirnos en Instagram para ver actualizaciones, entregas y el impacto real del proyecto.",
-  },
-  {
-    id: "8",
-    question: "¿Qué tipo de tapitas se pueden donar?",
-    answer:
-      "Aceptamos tapitas plásticas limpias de botellas de agua, refrescos, jugos y productos similares.",
-  },
-  {
-    id: "9",
-    question: "¿Puedo colaborar como institución o empresa?",
-    answer:
-      "Sí. Instituciones educativas, empresas y comunidades pueden convertirse en aliados y crear nuevos puntos de recolección basados en nuestro modelo.",
-  },
-  {
-  id: "10",
-  question: "¿Cómo nació el proyecto RoboTap?",
-  answer:
-    "El proyecto nació como una iniciativa académica en la materia de Administración de Proyectos, por idea del director de carrera Héctor Santillán, con el objetivo de generar impacto social real desde la universidad.",
-},
-{
-  id: "11",
-  question: "¿Quiénes participan en el proyecto?",
-  answer:
-    "RoboTap es desarrollado por estudiantes universitarios y la docente Yorka Perez que nos oriento para maximizar el impacto y desarrollo del proyecto.",
-},
+CREATE TABLE clientes_errors (
+    cliente_id INT,
+    nombre TEXT,
+    email TEXT,
+    fecha_registro TEXT,
+    error_motivo TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT now()
+);
 
-];
-
-export const plans = [
-  {
-    id: "0",
-    title: "Tapitas Recolectadas",
-    caption: "Cada tapita suma",
-    buttonText: "Punto de recolección",
-    buttonLink: "https://maps.app.goo.gl/1EfBtZ2N27vh17mF6",
-    features: [
-      "Ayuda directa a pacientes con quimioterapia",
-      "Recolección en puntos comunitarios",
-      "Material 100% reciclable",
-      "Impacto ambiental positivo",
-    ],
-    icon: "/images/circle.svg",
-    logo: "/images/plan-1.png",
-  },
-  {
-    id: "1",
-    title: "Organizaciones Aliadas",
-    caption: "Junto a fundaciones",
-    buttonText: "Síguenos y comparte",
-    buttonLink: "https://www.instagram.com/tapitasxquimio/",
-    features: [
-      "Entrega transparente de tapitas",
-      "Reciclaje responsable",
-      "Fondos destinados a quimioterapia",
-      "Colaboración certificada y verificada",
-    ],
-    icon: "/images/triangle.svg",
-    logo: "/images/plan-2.png",
-  },
-  {
-  id: "2",
-  title: "Apoyo Académico",
-  caption: "Comunidad educativa",
-  buttonText: "Conoce la escuela",
-  buttonLink: "https://www.instagram.com/unphu_tic/",
-  features: [
-    "Proyecto desarrollado en el entorno educativo",
-    "Participación de estudiantes y docentes",
-    "Innovación social",
-    "Aprendizaje con impacto real",
-  ],
-  icon: "/images/hexagon.svg",
-  logo: "/images/plan-3.png",
-}
-];
-
-export const joinMessages = [
-  {
-    id: "0",
-    message:
-      "Cada tapita recolectada representa esperanza para quienes luchan contra el cáncer.",
-  },
-  {
-    id: "1",
-    message:
-      "No necesitas grandes recursos para ayudar, solo ganas de aportar.",
-  },
-  {
-    id: "2",
-    message:
-      "Únete a una comunidad que cree en el impacto de las pequeñas acciones.",
-  },
-  {
-    id: "3",
-    message:
-      "Tu participación puede cambiar vidas y cuidar el planeta al mismo tiempo.",
-  },
-  {
-    id: "4",
-    message:
-      "Ser voluntario es más que ayudar, es formar parte del cambio.",
-  },
-  {
-    id: "5",
-    message:
-      "Juntos transformamos reciclaje en oportunidades de vida.",
-  },
-];
-
-export const logos = [
-  {
-    id: "0",
-    title: "Logo Unphu Informática",
-    url: "/images/logos/logoInformatica.png",
-    width: 156,
-    height: 48,
-  },
-  {
-    id: "1",
-    title: "Tapitas x Quimio",
-    url: "/images/logos/tapitasxquimio.png",
-    width: 194,
-    height: 48,
-  },
-  {
-    id: "2",
-    title: "UNPHU",
-    url: "/images/logos/UNPHU.webp",
-    width: 115,
-    height: 48,
-  },
-];
-
-export const Windows = () => {
-  return (
-    <svg
-      width="33"
-      height="32"
-      viewBox="0 0 33 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M17.674 2.64859L29.4077 0.0307338C30.3171 -0.165605 31.1678 0.603406 31.1678 1.63418V12.7273C31.1678 13.6272 30.5078 14.3635 29.7011 14.3635H17.9674C17.1607 14.3635 16.5006 13.6272 16.5006 12.7273V4.25204C16.5006 3.46669 16.9846 2.79585 17.674 2.64859Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M17.674 29.3507L29.4077 31.9686C30.3171 32.1649 31.1678 31.3959 31.1678 30.3651V19.272C31.1678 18.3721 30.5078 17.6358 29.7011 17.6358H17.9674C17.1607 17.6358 16.5006 18.3721 16.5006 19.272V27.7473C16.5006 28.5326 16.9846 29.2035 17.674 29.3507Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M11.7925 3.82676L2.99217 5.90466C2.31748 6.06827 1.8335 6.73912 1.8335 7.50811V12.7275C1.8335 13.6273 2.49352 14.3636 3.30021 14.3636H12.1005C12.9072 14.3636 13.5672 13.6273 13.5672 12.7275V5.41383C13.5672 4.38305 12.7018 3.5977 11.7925 3.82676Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M2.99217 26.0948L11.7925 28.1727C12.7018 28.4018 13.5672 27.6164 13.5672 26.5856V19.272C13.5672 18.3721 12.9072 17.6358 12.1005 17.6358H3.30021C2.49352 17.6358 1.8335 18.3721 1.8335 19.272V24.4913C1.8335 25.2603 2.31748 25.9312 2.99217 26.0948Z"
-        fill="#EAEDFF"
-      />
-    </svg>
-  );
-};
-
-export const MapPin = () => {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 22C12 22 19 15.6863 19 10.5C19 6.35786 15.866 3 12 3C8.13401 3 5 6.35786 5 10.5C5 15.6863 12 22 12 22Z"
-        stroke="#EAEDFF"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="10.5"
-        r="2.5"
-        stroke="#EAEDFF"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-};
-
-export const Web = () => {
-  return (
-    <svg
-      width="33"
-      height="32"
-      viewBox="0 0 33 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12.5484 0.847986C11.8284 2.95995 11.3164 5.15192 10.9164 7.34388C14.6285 6.92789 18.3727 6.92789 22.0848 7.34388C21.6848 5.15192 21.1728 2.97595 20.4528 0.847986C20.4307 0.759613 20.4238 0.686493 20.4164 0.607564C20.4131 0.572174 20.4097 0.535616 20.4048 0.495992C19.1567 0.191997 17.8447 0 16.5006 0C15.1405 0 13.8445 0.191997 12.5804 0.495992C12.5741 0.546895 12.5728 0.592737 12.5715 0.637543C12.5696 0.7054 12.5677 0.770896 12.5484 0.847986Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M24.8211 7.67982C26.8852 8.03181 28.9172 8.52781 30.9333 9.1358C29.3493 5.82385 26.6771 3.15189 23.365 1.56792C23.989 3.56789 24.485 5.61585 24.8211 7.67982Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M9.54034 30.2556C9.51633 30.2556 9.48833 30.2636 9.46033 30.2716C9.43233 30.2796 9.40433 30.2876 9.38033 30.2876C6.27619 28.7517 3.74809 26.2077 2.19602 23.1037C2.19602 23.0797 2.20402 23.0517 2.21202 23.0237C2.22002 22.9957 2.22802 22.9677 2.22802 22.9437C4.1801 23.5197 6.19619 23.9517 8.19628 24.2877C8.54829 26.3037 8.96431 28.3037 9.54034 30.2556Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M30.8053 23.1197C29.2213 26.3037 26.5811 28.8797 23.365 30.4316C23.973 28.3997 24.485 26.3517 24.8211 24.2877C26.8372 23.9517 28.8212 23.5197 30.7733 22.9437C30.7637 22.9823 30.7772 23.0208 30.7896 23.0558C30.7977 23.079 30.8053 23.1006 30.8053 23.1197Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M9.54041 1.74401C8.96438 3.69598 8.54836 5.67994 8.21235 7.69591C6.14826 8.01591 4.10017 8.5279 2.06808 9.13589C3.62015 5.91994 6.19626 3.27998 9.3804 1.69601C9.4044 1.69601 9.4324 1.70801 9.4604 1.72001C9.4884 1.73201 9.51641 1.74401 9.54041 1.74401Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M7.84432 21.5836C5.63622 21.1836 3.46013 20.6716 1.34804 19.9516C1.27094 19.9324 1.20545 19.9305 1.13759 19.9286C1.09278 19.9273 1.04693 19.926 0.996021 19.9196C0.692008 18.6557 0.5 17.3597 0.5 15.9997C0.5 14.6557 0.692008 13.3437 0.996021 12.0958C1.03565 12.0908 1.07221 12.0874 1.1076 12.0841C1.18653 12.0767 1.25966 12.0699 1.34804 12.0478C3.47613 11.3438 5.63622 10.8158 7.84432 10.4158C7.4443 14.1277 7.4443 17.8717 7.84432 21.5836Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M32.005 19.9196C32.309 18.6557 32.501 17.3597 32.501 15.9997C32.501 14.6557 32.309 13.3597 32.005 12.0958C31.877 12.0958 31.781 12.0798 31.653 12.0478C29.5409 11.3278 27.3488 10.8158 25.1567 10.4158C25.5727 14.1277 25.5727 17.8717 25.1567 21.5836C27.3488 21.1836 29.5249 20.6556 31.653 19.9516C31.7301 19.9324 31.7956 19.9305 31.8635 19.9286C31.9083 19.9273 31.9541 19.926 32.005 19.9196Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M22.0848 24.6554C21.6848 26.8633 21.1728 29.0393 20.4528 31.1513C20.4307 31.2396 20.4238 31.3128 20.4164 31.3917C20.4131 31.4271 20.4097 31.4636 20.4048 31.5033C19.1567 31.8073 17.8447 31.9993 16.5006 31.9993C15.1405 31.9993 13.8445 31.8073 12.5804 31.5033C12.5741 31.4524 12.5728 31.4065 12.5715 31.3617C12.5696 31.2939 12.5677 31.2284 12.5484 31.1513C11.8444 29.0233 11.3164 26.8633 10.9164 24.6554C12.7724 24.8634 14.6285 25.0074 16.5006 25.0074C18.3727 25.0074 20.2448 24.8634 22.0848 24.6554Z"
-        fill="#EAEDFF"
-      />
-      <path
-        d="M10.4793 22.0209C14.4812 22.5258 18.5205 22.5258 22.5224 22.0209C23.0274 18.0192 23.0274 13.9802 22.5224 9.97847C18.5205 9.47358 14.4812 9.47358 10.4793 9.97847C9.97434 13.9802 9.97434 18.0192 10.4793 22.0209Z"
-        fill="#EAEDFF"
-      />
-    </svg>
-  );
-};
-
-export const Instagram = () => {
-  return (
-    <svg
-      width="32"
-      height="32"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7 2H17C20.3137 2 23 4.68629 23 8V16C23 19.3137 20.3137 22 17 22H7C3.68629 22 1 19.3137 1 16V8C1 4.68629 3.68629 2 7 2Z"
-        stroke="#EAEDFF"
-        strokeWidth="2"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="4"
-        stroke="#EAEDFF"
-        strokeWidth="2"
-      />
-      <circle
-        cx="17.5"
-        cy="6.5"
-        r="1.5"
-        fill="#EAEDFF"
-      />
-    </svg>
-  );
-};
-
-
-export const links = [
-  {
-    id: "0",
-    title: "Instagram Tapitas x Quimio",
-    icon: <Instagram />,
-    url: "https://www.instagram.com/tapitasxquimio/",
-  },
-  {
-    id: "1",
-    title: "Instagram Escuela de Informática",
-    icon: <Instagram />,
-    url: "https://www.instagram.com/unphu_tic/",
-  },
-  {
-    id: "2",
-    title: "Ubicación RoboTap UNPHU",
-    icon: <MapPin/>,
-    url: "https://maps.app.goo.gl/1EfBtZ2N27vh17mF6",
-  },
-  {
-    id: "3",
-    title: "Web de la UNPHU",
-    icon: <Web />,
-    url: "https://unphu.edu.do/",
-  },
-];
-
-export const socials = [
-  {
-    id: "0",
-    title: "LinkedIn",
-    icon: Linkedin,
-    url: "https://www.linkedin.com/in/angel-emilio-aquino/",
-  },
-  {
-    id: "1",
-    title: "GitHub",
-    icon: Github,
-    url: "https://github.com/AngelEmilioAquino",
-  },
-  {
-    id: "2",
-    title: "WhatsApp",
-    icon: MessageCircle,
-    url: "https://wa.me/18094038309?text=Hola%20Angel%20Me%20gustaría%20hablar%20sobre%20un%20proyecto.",
-  },
-  {
-    id: "3",
-    title: "Portfolio",
-    icon: Globe,
-    url: "https://angelaquino.vercel.app/",
-  },
-];
+CREATE TABLE ventas_errors (
+    venta_id INT,
+    cliente_id INT,
+    fecha TEXT,
+    total TEXT,
+    moneda TEXT,
+    canal TEXT,
+    error_motivo TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT now()
+);
 ```
-
 </details>
 
 <details>
-<summary><code>Marker.jsx</code></summary>
+<summary><code>Cambios en las tablas que hice</code></summary>
 
-```jsx
-const Marker = ({ fill }) => {
-  return (
-    <svg
-      width="8"
-      height="22"
-      viewBox="0 0 8 22"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M2.5 0H0.5V4V18V22H2.5V16.25L7.63991 11.7526C8.09524 11.3542 8.09524 10.6458 7.63991 10.2474L2.5 5.75V0Z"
-        fill={fill || '#2EF2FF'}
-      />
-    </svg>
-  );
-};
+```sql
+-- CLIENTES
+ALTER TABLE public.clientes
+ALTER COLUMN cliente_id SET NOT NULL;
 
-export default Marker;
+ALTER TABLE public.clientes
+ADD CONSTRAINT clientes_pkey PRIMARY KEY (cliente_id);
 
+-- VENTAS
+ALTER TABLE public.ventas
+ALTER COLUMN cliente_id TYPE bigint USING cliente_id::bigint;
+
+ALTER TABLE public.ventas
+ALTER COLUMN cliente_id SET NOT NULL;
+
+-- FOREIGN KEY
+ALTER TABLE public.ventas
+ADD CONSTRAINT ventas_cliente_fk
+FOREIGN KEY (cliente_id)
+REFERENCES public.clientes (cliente_id);
 ```
+<a name="conclusion">🚀 Conclusión</a>
+
